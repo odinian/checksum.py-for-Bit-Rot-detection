@@ -9,10 +9,19 @@ This script should work on any system that can run Python 3. For Windows you mig
 # Getting Started
 Download the script and run it with the -cc option to create the default config file "checksum.ini" in the same folder as the script.
 
+cd to the script's directory to create the INI config file.
+> python3 checksums.py -cc
+
 Edit the config file with any text editor and set three basic pieces of info:
 * The path to folder to monitor
 * The path to the folder where the SQLite database will be stored
 * Any file extensions to ignore
+
+then run the script to calculate and store the checksums. On my system (AMD5800x with NVME drive) it takes about 21 minutes to process 35000 images.
+cd to the script's directory
+> python3 checksums.py -vv -p -f
+
+I'm not sure how to set the she-bang line for all platforms. Any help is appreciated.
 
 # Assumptions
 This script was written to check the file integrity of a photos folder, but can work with any folder containing data the never changes. The assumption is the files in the folder never change, except when new files are added. If XML sidecar files or other files are written to the folder (or sub-folders), they can be ignored by file extension.
