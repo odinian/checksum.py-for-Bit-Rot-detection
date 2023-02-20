@@ -14,6 +14,8 @@ Edit the config file with any text editor and set three basic pieces of info:
 * The path to the folder where the SQLite database will be stored
 * Any file extensions to ignore
 
+Consider running the script monthly. For now, set a calendar alert and run it manually. I want to add notifications so the script can be scheduled. 
+
 # Assumptions
 This script was written to check the file integrity of a photos folder, but can work with any folder containing data the never changes. The assumption is the files in the folder never change, except when new files are added. If XML sidecar files or other files are written to the folder (or sub-folders), they can be ignored by file extension.
 
