@@ -96,3 +96,6 @@ Output some (mildy) interested stats about the files in the database.
 
 ## Create Config
 Will create an empty config file at with the default path, or the path passed to the script. Will not overwrite a file already there.
+
+# Note
+I could have used [Windows File Integrity Manager](https://owasp.org/www-project-winfim.net/), but I was mostly done with my script before I learned of this tool, and I wanted a bit more control. Still, WinFIM is worth looking at.
