@@ -1,4 +1,4 @@
-# checksums.py
+# checksum.py
 A python script to store and compare checksums to reveal file corruption like bit rot.
  
 Discussion of bit rot is way beyond this readme file, so Google it learn more.
@@ -10,7 +10,7 @@ This script should work on any system that can run Python 3. For Windows you mig
 Download the script and run it with the -cc option to create the default config file "checksum.ini" in the same folder as the script.
 
 cd to the script's directory to create the INI config file.
-> python3 checksums.py -cc
+> python3 checksum.py -cc
 
 Edit the config file with any text editor and set three basic pieces of info:
 * The path to folder to monitor
@@ -19,7 +19,7 @@ Edit the config file with any text editor and set three basic pieces of info:
 
 then run the script to calculate and store the checksums. On my system (AMD5800x with NVME drive) it takes about 21 minutes to process 35000 images.
 cd to the script's directory
-> python3 checksums.py -vv -p -f
+> python3 checksum.py -vv -p -f
 
 I'm not sure how to set the she-bang line for all platforms. Any help is appreciated.
 
