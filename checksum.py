@@ -291,7 +291,7 @@ def updateChecksum(pCon, pDBCur, pDir, pFName, pExt, pPath):
         base_checksum_sha1, base_checksum_crc32, latest_checksum_sha1, latest_checksum_crc32,
         date_updated)
     VALUES (:p, :fn, :ext, :sha1, :crc,  :sha1, :crc, CURRENT_TIMESTAMP)
-    ON CONFLICT DO UPDATE SET latest_checksum_sha1 = :sha1, latest_checksum_crc32 = :crc, date_updated = CURRENT_TIMESTAMP
+    ON CONFLICT (path, filename) DO UPDATE SET latest_checksum_sha1 = :sha1, latest_checksum_crc32 = :crc, date_updated = CURRENT_TIMESTAMP
     """
     toInsert = [{'p': pDir , 'fn': pFName, 'ext': pExt, 'sha1': sha1, 'crc': crc }]
     pDBCur.executemany(sqlText, toInsert)
