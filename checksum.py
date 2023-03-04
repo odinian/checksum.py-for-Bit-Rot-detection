@@ -28,11 +28,12 @@ import hashlib
 import zlib
 import os
 import pathlib
-import time
+import time, datetime
 import sqlite3
 import argparse
 import locale
 import configparser
+import math
 
 # set up the global for the script's configs
 # lazy, I know. Sue me. :-)
@@ -388,10 +389,31 @@ def main():
     dbStartTime = db_setup(db_cursor)    
 
     if not args.report_only:
+        # count the file for progress reporting
+        totalFiles = 0
+        for directory, filename, extension, path in recursive_file_listing(configDict['monitorDir']):
+            totalFiles += 1
+        print(totalFiles)
+    
+        count = 0
         lastDir = ''
         for directory, filename, extension, path in recursive_file_listing(configDict['monitorDir']):
+            count += 1
             if directory != lastDir and (args.verbose or args.very_verbose):
-                print('\nProcessing: ' + directory + '.', end='', flush=True)
+                # calculate the remaining time
+                checkpoint = time.time()
+                elapsed = checkpoint - start
+                complete = count/totalFiles
+                estimated = elapsed / complete
+                remaining = estimated - elapsed
+                hours = math.floor(remaining / 60 / 60)
+                minutes = math.floor(remaining / 60)
+                seconds = int(remaining % 60)
+                old_time = datetime.datetime.now()
+                new_time = old_time + datetime.timedelta(seconds = remaining)
+                print('\n{0} of {1} - {2:2.2f}% complete - Estimate time left (H:M:S): {3:02d}:{4:02d}:{5:02d} - Est Completion: {6}'.format(count, totalFiles, complete*100,hours, minutes, seconds,new_time.strftime('%H:%M:%S')))
+
+                print('Processing: ' + directory + '.', end='', flush=True)
             else:
                 if args.very_verbose:
                     print('.', end='', flush=True)
